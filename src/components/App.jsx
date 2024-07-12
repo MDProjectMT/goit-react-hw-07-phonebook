@@ -5,7 +5,7 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/goit-react-hw-06-phonebook/" element={<ContactsBook />} />
+        <Route path="/goit-react-hw-07-phonebook/" element={<ContactsBook />} />
       </Routes>
     </BrowserRouter>
   );
