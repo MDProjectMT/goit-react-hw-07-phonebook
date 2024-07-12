@@ -21,7 +21,6 @@ export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contact, thunkAPI) => {
     try {
-      console.log('Sending contact:', contact);
       const { data } = await apiClient.post(`/contact`, contact);
       return data;
     } catch (error) {
