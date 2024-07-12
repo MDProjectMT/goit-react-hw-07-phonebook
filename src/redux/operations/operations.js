@@ -41,29 +41,3 @@ export const deleteContact = createAsyncThunk(
     }
   }
 );
-
-// export const fetchContacts = () => async (dispatch) => {
-//   try {
-//     dispatch(fetchingInProgres());
-//     const response = await apiClient.get('/contact');
-//     dispatch(fetchingSuccess(response.data));
-//   } catch (error) {
-//     dispatch(fetchingError(error.message));
-//   }
-// };
-// powyższa funkcja z dwiema strzałkami => async() => {} - funkcja z domniemanym zwrotem -
-// pierwsza funkcja wywoła drugą funkcje - zwracamy funkcję jest to zwykły callback
-
-//a tu inny zapis standardowy powyższego przykładu
-
-// function fetchContacts() {
-//   return async function (dispatch) {
-//     try {
-//       dispatch(fetchingInProgres());
-//       const response = await apiClient.get('/contact');
-//       dispatch(fetchingSuccess(response.data));
-//     } catch (error) {
-//       dispatch(fetchingError(error.message));
-//     }
-//   };
-// }

@@ -20,7 +20,6 @@ export default function ContactsBook() {
   const error = useSelector(selectError);
   const loading = useSelector(selectLoading);
   const contacts = useSelector(selectContacts);
-  // const { contacts, loading, error } = useSelector((state) => state.contacts);
   const filter = useSelector((state) => state.filter);
 
   useEffect(() => {
@@ -52,10 +51,7 @@ export default function ContactsBook() {
       window.alert(JSON.stringify(`${name} is already in contacts`));
       return;
     }
-    // dispatch(addContact({ name, number }));
-    const newContact = { name, number };
-    console.log('Submitting new contact:', newContact);
-    dispatch(addContact(newContact));
+    dispatch(addContact({ name, number }));
   }
 
   function handleDelete(id) {

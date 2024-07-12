@@ -25,8 +25,6 @@ export default function ContactForm({ onSubmit }) {
     setForm({ name: '', number: '' });
   }
 
-  // const nameId = nanoid();
-  // const numberId = nanoid();
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <label htmlFor="nameId">Name</label>
