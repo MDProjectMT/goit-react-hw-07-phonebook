@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import styles from './ContactForm.module.scss';
 import PropTypes from 'prop-types';
@@ -11,7 +10,7 @@ export default function ContactForm({ onSubmit }) {
 
   function handleChange(ev) {
     const { name, value } = ev.currentTarget;
-    setForm(prevForm => {
+    setForm((prevForm) => {
       return {
         ...prevForm,
         [name]: value,
@@ -26,13 +25,13 @@ export default function ContactForm({ onSubmit }) {
     setForm({ name: '', number: '' });
   }
 
-  const nameId = nanoid();
-  const numberId = nanoid();
+  // const nameId = nanoid();
+  // const numberId = nanoid();
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <label htmlFor={nameId}>Name</label>
+      <label htmlFor="nameId">Name</label>
       <input
-        id={nameId}
+        id="nameId"
         type="text"
         name="name"
         pattern="^([a-zA-Zа-яА-Я]+[ ]?[a-zA-Zа-яА-Я]+)*$"
@@ -42,12 +41,12 @@ export default function ContactForm({ onSubmit }) {
         value={form.name}
         onChange={handleChange}
       />
-      <label htmlFor={numberId}>Number</label>
+      <label htmlFor="numberId">Number</label>
       <input
-        id={numberId}
+        id="numberId"
         type="tel"
         name="number"
-        pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
         placeholder="number"

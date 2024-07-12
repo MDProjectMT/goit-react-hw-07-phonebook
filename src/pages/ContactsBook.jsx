@@ -3,22 +3,34 @@ import Filter from '../components/Filter/Filter';
 import ContactList from '../components/ContactList/ContactList';
 import { useEffect } from 'react';
 import { setFilter } from '../redux/slices/filter.slice';
-import {
-  addContact,
-  deleteContact,
-  setContact,
-} from '../redux/slices/contacts.slice.js';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchContacts,
+  deleteContact,
+  addContact,
+} from '../redux/operations/operations';
+import {
+  selectContacts,
+  selectError,
+  selectLoading,
+} from '../redux/selectors/selectors';
 
 export default function ContactsBook() {
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts);
+  const error = useSelector(selectError);
+  const loading = useSelector(selectLoading);
+  const contacts = useSelector(selectContacts);
+  // const { contacts, loading, error } = useSelector((state) => state.contacts);
   const filter = useSelector((state) => state.filter);
 
   useEffect(() => {
-    const addContact = localStorage.getItem('contacts');
-    if (addContact) {
-      dispatch(setContact(JSON.parse(addContact)));
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const storedContact = localStorage.getItem('contacts');
+    if (storedContact) {
+      dispatch(fetchContacts(JSON.parse(storedContact)));
     }
   }, [dispatch]);
 
@@ -40,12 +52,15 @@ export default function ContactsBook() {
       window.alert(JSON.stringify(`${name} is already in contacts`));
       return;
     }
-    dispatch(addContact({ name, number }));
+    // dispatch(addContact({ name, number }));
+    const newContact = { name, number };
+    console.log('Submitting new contact:', newContact);
+    dispatch(addContact(newContact));
   }
 
-  // function handleDelete(id) {
-  //   dispatch(deleteContact(id));
-  // }
+  function handleDelete(id) {
+    dispatch(deleteContact(id));
+  }
 
   return (
     <div>
@@ -56,8 +71,10 @@ export default function ContactsBook() {
       <ContactList
         filter={filter}
         contacts={contacts}
-        onDelete={(id) => dispatch(deleteContact(id))}
+        onDelete={handleDelete}
       />
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
     </div>
   );
 }
